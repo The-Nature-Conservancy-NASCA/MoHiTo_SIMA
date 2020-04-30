@@ -47,7 +47,7 @@ close
 warning off
 
 %% Inputs Data
-FileControlMATLAB   = 'Control_File_MATLAB.MoHiTo'; 
+FileControlMATLAB   = 'Control_File_MATLAB.MoHiTo';
 ErrorMessage        = 'Successful Run';
 try 
     %% Load Control File MATLAB        
@@ -60,7 +60,7 @@ try
             Tmp = strfind(LineFile, '*');
             if ~isempty(Tmp)                
                 LineFile = strrep(LineFile,'*','');
-%                 LineFile = strrep(LineFile,' ','');
+                LineFile = strrep(LineFile,' ','');
                 PathProject  = LineFile;                
             end
             LineFile = fgetl(ID_File);
