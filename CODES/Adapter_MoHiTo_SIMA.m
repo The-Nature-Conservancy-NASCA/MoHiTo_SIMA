@@ -43,12 +43,10 @@
 clear
 clc
 close
-
 warning off
 
 %% Inputs Data
 FileControlMATLAB   = 'Control_File_MATLAB.MoHiTo';
-ErrorMessage        = 'Successful Run';
 try 
     %% Load Control File MATLAB        
     try
@@ -60,7 +58,7 @@ try
             Tmp = strfind(LineFile, '*');
             if ~isempty(Tmp)                
                 LineFile = strrep(LineFile,'*','');
-                LineFile = strrep(LineFile,' ','');
+%                 LineFile = strrep(LineFile,' ','');
                 PathProject  = LineFile;                
             end
             LineFile = fgetl(ID_File);
@@ -74,10 +72,13 @@ try
         return
         
     end    
-    delete(fullfile(PathProject, 'Error.MoHiTo'))
-    
     disp(['Step-1|Ok|','-> Load Control File Matlab'])
     
+    %% Remove ErrorFile 
+    NameFile = fullfile(PathProject, 'Error.MoHiTo');
+    delete(NameFile);
+    
+    tic
     %% Load Configuration Data - MoHiTo
     [ErrorMessage, UserData] = Load_Configure(PathProject);
     if ~strcmp(ErrorMessage,'Successful Run')
@@ -144,10 +145,11 @@ try
     
     %% Time
     t = toc;
-    disp(['Execution Time - MoHiTo = ', num2str(t/60,'%0.1f'),' Min'])
+    disp(['Execution Time - MoHiTo = ', num2str(t/60,'%0.2f'),' Min'])
+    WriteError(NameFile, ErrorMessage)
     
 catch ME
-    ErrorMessage    = sprintf(ErrorMessage, newline, 'Error in function %s() at line %d.\n\nError Message:\n%s', ...
+    ErrorMessage    = sprintf('Error in function %s() at line %d.\n\nError Message:\n%s', ...
         ME.stack(1).name, ME.stack(1).line, ME.message);  
     
     NameFile = fullfile(PathProject, 'Error.MoHiTo');

@@ -101,7 +101,6 @@ UserData.Date               = datetime();
 
 ErrorMessage    = 'Successful Run';
 try
-    
     if ~UserData.Terminal 
         ProgressBar = waitbar(0, 'Load Data -> Parameters.MoHiTo');
         wbch        = allchild(ProgressBar);
@@ -271,9 +270,9 @@ try
         disp('Load Data -> Parameters.MoHiTo -> Ok')
     end
     
-catch ME   
-    ErrorMessage    = sprintf(ErrorMessage, newline, 'Error in function %s() at line %d.\n\nError Message:\n%s', ...
-        ME.stack(1).name, ME.stack(1).line, ME.message);  
+catch ME        
+    ErrorMessage    = sprintf('Error in function %s() at line %d.\n\nError Message:\n%s', ...
+        ME.stack(1).name, ME.stack(1).line, ME.message);
     
     if ~UserData.Terminal 
         close(ProgressBar)

@@ -4,7 +4,7 @@ ID_File = fopen( NameFile, 'w');
 
 Date = (1:12)';
 Date = repmat(Date,length(Code),1);
-Code = reshape(repmat(Code,12,1),[],1);
+Code = reshape(repmat(Code',12,1),[],1);
 Data = reshape(Data(:,1:12)',[],1);
 
 fprintf(ID_File,'%s\n','Code,Month,Value');

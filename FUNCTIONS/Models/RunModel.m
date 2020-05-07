@@ -148,7 +148,7 @@ try
     end
     
 catch ME
-    ErrorMessage    = sprintf(ErrorMessage, newline, 'Error in function %s() at line %d.\n\nError Message:\n%s', ...
+    ErrorMessage    = sprintf('Error in function %s() at line %d.\n\nError Message:\n%s', ...
         ME.stack(1).name, ME.stack(1).line, ME.message);
 
     if ~UserData.Terminal 
